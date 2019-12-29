@@ -5,12 +5,15 @@
  */
 package proyecto2_edd;
 
+import Graficas.VentanaInicio;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Iterator;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -25,22 +28,21 @@ public class Proyecto2_EDD {
         // TODO code application logic here
         JSONParser parser = new JSONParser();
         try {
-            Object obj = parser.parse(new FileReader("myJson.json"));
-            JSONObject jsonObj =(JSONObject)obj;
-            String name = (String)jsonObj.get("Name");
-            System.out.println("Name is: "+name);
-            
-            String location = (String)jsonObj.get("Localitazion");
-            System.out.println("Name is: "+location);
-            
-            JSONArray cousesa = (JSONArray)jsonObj.get("Lenguajes");
-            Iterator<String> iterator = cousesa.iterator();
-            while(iterator.hasNext())
-            {
-                System.out.println("Lenguajes: "+iterator.next());
+            Object obj = parser.parse(new FileReader("Usuarios.json"));
+            JSONArray jsonA =(JSONArray)obj;
+            JSONObject usuario;
+            for(Object j: jsonA){
+                usuario = (JSONObject) j;
+                System.out.println("--------------------------------------------------");
+                System.out.println("El nombre es: "+(String) usuario.get("Nombre"));
+                System.out.println("El apellido es: "+(String) usuario.get("Apellido"));
+                System.out.println("El carnet es: "+(String) usuario.get("Carnet"));
+                System.out.println("El password es: "+(String) usuario.get("Password"));
             }
-        } catch (Exception e) {
+        } catch (IOException | ParseException e) {
+            
         }
+        VentanaInicio ventanaInicio = new Graficas.VentanaInicio();
         
     }
     
