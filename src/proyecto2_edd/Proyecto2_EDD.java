@@ -5,7 +5,8 @@
  */
 package proyecto2_edd;
 
-import Graficas.VentanaInicio;
+import EDD.*;
+import Graficas.*;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -26,24 +27,29 @@ public class Proyecto2_EDD {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        JSONParser parser = new JSONParser();
-        try {
-            Object obj = parser.parse(new FileReader("Usuarios.json"));
-            JSONArray jsonA =(JSONArray)obj;
-            JSONObject usuario;
-            for(Object j: jsonA){
-                usuario = (JSONObject) j;
-                System.out.println("--------------------------------------------------");
-                System.out.println("El nombre es: "+(String) usuario.get("Nombre"));
-                System.out.println("El apellido es: "+(String) usuario.get("Apellido"));
-                System.out.println("El carnet es: "+(String) usuario.get("Carnet"));
-                System.out.println("El password es: "+(String) usuario.get("Password"));
-            }
-        } catch (IOException | ParseException e) {
-            
-        }
-        VentanaInicio ventanaInicio = new Graficas.VentanaInicio();
-        
+//        Login login = new Login();
+//        login.setVisible (true);
+//
+//        JSONParser parser = new JSONParser();
+//        try {
+//            Object obj = parser.parse(new FileReader("Usuarios.json"));
+//            JSONArray jsonA =(JSONArray)obj;
+//            JSONObject usuario;
+//            for(Object j: jsonA){
+//                usuario = (JSONObject) j;
+//                System.out.println("--------------------------------------------------");
+//                System.out.println("El nombre es: "+(String) usuario.get("Nombre"));
+//                System.out.println("El apellido es: "+(String) usuario.get("Apellido"));
+//                System.out.println("El carnet es: "+(String) usuario.get("Carnet"));
+//                System.out.println("El password es: "+(String) usuario.get("Password"));
+//            }
+//        } catch (IOException | ParseException e) {
+//            
+//        }
+//        System.out.println("------------------------------------");
+//       
+//        
+
     }
     
 }

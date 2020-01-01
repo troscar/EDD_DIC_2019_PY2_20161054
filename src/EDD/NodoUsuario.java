@@ -4,14 +4,13 @@ package EDD;
 public class NodoUsuario {
     private String Nombre;
     private String Apellido;
-    private Integer Carnet;
-    private Integer Password;
+    private String Carnet;
+    private String Password;
 
     public NodoUsuario() {
     }
-    
 
-    public NodoUsuario(String Nombre, String Apellido, Integer Carnet, Integer Password) {
+    public NodoUsuario(String Nombre, String Apellido, String Carnet, String Password) {
         this.Nombre = Nombre;
         this.Apellido = Apellido;
         this.Carnet = Carnet;
@@ -34,22 +33,20 @@ public class NodoUsuario {
         this.Apellido = Apellido;
     }
 
-    public Integer getCarnet() {
+    public String getCarnet() {
         return Carnet;
     }
 
-    public void setCarnet(Integer Carnet) {
+    public void setCarnet(String Carnet) {
         this.Carnet = Carnet;
     }
 
-    public Integer getPassword() {
+    public String getPassword() {
         return Password;
     }
 
-    public void setPassword(Integer Password) {
+    public void setPassword(String Password) {
         this.Password = Password;
     }
-    
-    
-
+ 
 }
