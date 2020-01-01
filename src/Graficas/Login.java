@@ -129,7 +129,10 @@ public class Login extends javax.swing.JFrame {
         }else
         {
             //LLAMAR AL METODO BUSCAR EN LA TABLA HASH;
-            
+            String pas =proyecto2_edd.Proyecto2_EDD.hash.buscar_carne(jTextField1.getText());
+            if(pas.equals(jPasswordField1.getText())){
+                System.out.println("ENTRO USUARIO");
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
