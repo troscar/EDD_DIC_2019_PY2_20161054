@@ -125,7 +125,9 @@ public class Login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if("Admin".equals(jTextField1.getText())&& "Oscar".equals(jPasswordField1.getText())){
-            //System.out.println("AAAAAAAAAAAAAAAAAAADDDDDDDDDDDDDDDDDDDDDDDDDMMMMMMMMMMMMMMMMMMMMMMIIIIIIIIIIIIIIIIIINNNNNNNNNNNNNNNNNN");
+            Admin admin = new Admin();
+            admin.setVisible(true);
+            this.dispose();
         }else
         {
             //LLAMAR AL METODO BUSCAR EN LA TABLA HASH;

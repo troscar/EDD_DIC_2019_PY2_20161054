@@ -18,39 +18,20 @@ import org.json.simple.parser.ParseException;
 
 /**
  *
- * @author tracs
+ * @author Oscar
  */
 public class Proyecto2_EDD {
 
     /**
      * @param args the command line arguments
      */
+    // ESTRUCTURAS A UTILIZAR EN LA APLICACION 
     public static HashTable hash = new HashTable();
+    
+    
     public static void main(String[] args) {
         
         // TODO code application logic here
-        
-
-        JSONParser parser = new JSONParser();
-        try {
-            Object obj = parser.parse(new FileReader("Usuarios.json"));
-            JSONArray jsonA =(JSONArray)obj;
-            JSONObject usuario;
-            for(Object j: jsonA){
-                usuario = (JSONObject) j;
-                hash.Ingresar((String)usuario.get("Nombre"), (String)usuario.get("Apellido"), (String)usuario.get("Carnet"), (String)usuario.get("Password"));
-//                System.out.println("--------------------------------------------------");
-//                System.out.println("El nombre es: "+(String) usuario.get("Nombre"));
-//                System.out.println("El apellido es: "+(String) usuario.get("Apellido"));
-//                System.out.println("El carnet es: "+(String) usuario.get("Carnet"));
-//                System.out.println("El password es: "+(String) usuario.get("Password"));
-            }
-        } catch (IOException | ParseException e) {
-            
-        }
-        System.out.println("------------------------------------");
-       hash.Ingresar("Colette", "Harly", "57-815-1498", "wmYOZ7");
-        hash.Mostrar();
         Login login = new Login();
         login.setVisible (true);
 
