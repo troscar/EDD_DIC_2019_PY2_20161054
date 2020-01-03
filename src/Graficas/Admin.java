@@ -7,6 +7,8 @@ package Graficas;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import org.json.simple.JSONArray;
@@ -175,7 +177,12 @@ public class Admin extends javax.swing.JFrame {
         System.out.println("RECHAZOS");
         hash.Mostrar_Rechazos();
         System.out.println("---------------------------------------");
-        //String graficar = hash.graficar("C:\\Users\\tracs\\Desktop\\","rep1");
+        try {
+            //String graficar = hash.graficar("C:\\Users\\tracs\\Desktop\\","rep1");
+            hash.graficar();
+        } catch (IOException ex) {
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

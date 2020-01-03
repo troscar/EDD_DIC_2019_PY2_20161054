@@ -29,11 +29,13 @@ public class Proyecto2_EDD {
     public static HashTable hash = new HashTable();
     
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        //System.out.println("Hola Mundo");
         
         // TODO code application logic here
         Login login = new Login();
         login.setVisible (true);
+        //hash.graficar();
 
     }
     

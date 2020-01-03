@@ -6,6 +6,7 @@
 package Graficas;
 
 import javax.swing.JFrame;
+import static proyecto2_edd.Proyecto2_EDD.hash;
 
 /**
  *
@@ -131,9 +132,9 @@ public class Login extends javax.swing.JFrame {
         }else
         {
             //LLAMAR AL METODO BUSCAR EN LA TABLA HASH;
-            String pas =proyecto2_edd.Proyecto2_EDD.hash.buscar_carne(jTextField1.getText());
+            String pas =hash.buscar_carne(jTextField1.getText());
             if(pas.equals(jPasswordField1.getText())){
-                System.out.println("ENTRO USUARIO");
+                new Usurio(hash.buscar_nombre(jTextField1.getText()),hash.buscar_apellido(jTextField1.getText()));
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed

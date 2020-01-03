@@ -1,6 +1,7 @@
 
 package EDD;
 
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class HashTable {
@@ -170,6 +171,24 @@ public class HashTable {
         }
         return "";
     }
+    //BUSCAR UN ELEMENTO POR CARNE devuelve la NOMBRE
+    public String buscar_nombre(String carn){
+        for (int i = 0; i < arreglo.length; i++) {
+            if(arreglo[i].getCarnet().equals(carn)){
+                return arreglo[i].getPassword();
+            }
+        }
+        return "";
+    }
+    //BUSCAR UN ELEMENTO POR CARNE devuelve la APELLIDO
+    public String buscar_apellido(String carn){
+        for (int i = 0; i < arreglo.length; i++) {
+            if(arreglo[i].getCarnet().equals(carn)){
+                return arreglo[i].getPassword();
+            }
+        }
+        return "";
+    }
     //COMPRUEBA SI YA EXISTE UN CARNET EN EL ARREGLO
     public boolean carnet_existe(String carn){
         for (int i = 0; i < arreglo.length; i++) {
@@ -180,26 +199,65 @@ public class HashTable {
         return false;
     }
     
-    public static String graficar(String ruta, String nombre) {
-        try {
-            String dotPath = "C:\\Users\\tracs\\Desktop\\";
-            String fileInputPath = ruta;
-            String fileOutputPath = dotPath+ nombre;
-            String tParam = "-Tjpg";
-            String tOParam = "-o";
-            String[] cmd = new String[5];
-            cmd[0] = dotPath;
-            cmd[1] = tParam;
-            cmd[2] = fileInputPath;
-            cmd[3] = tOParam;
-            cmd[4] = fileOutputPath;
-            Runtime rt = Runtime.getRuntime();
-            rt.exec(cmd);
-        } catch (IOException e) {
-            return "ERROR " + e.toString();
-            //e.printStackTrace();
+    public void graficar() throws IOException {
+                                                  
+        try (FileWriter fichero = new FileWriter("C:/Users/tracs/Desktop/hashusuarios.txt")) {
+            fichero.write("digraph  G{\n"
+                    + "nodesep=.05;\n" +
+                    "\n" +
+                    "rankdir=LR;\n" +
+                    "\n" +
+                    "node [shape=record,width=.1,height=.1];\n"); 
+            String pal = "";
+            for (int i = 0; i < arreglo.length; i++) {
+                pal = pal +i+"|";
+            }
+            fichero.write("node0 [label = \" "+pal+" \",height=2.0];");
+            fichero.write("node [width = 1.5];");
+            for (int i = 0; i < arreglo.length; i++) {
+                pal = "";
+                //if(!arreglo[i].getCarnet().equals("-1")){
+                    pal = "{ "+arreglo[i].getCarnet()+"|"+arreglo[i].getPassword()+"|"+arreglo[i].getNombre()+"|"+arreglo[i].getApellido()+"}";
+                    fichero.write("node"+(i+1)+" [label = \" "+pal+" \"]\n;");
+                //}
+                
+            }
+            for (int i = 0; i < arreglo.length; i++) {
+                //if(!arreglo[i].getCarnet().equals("-1")){
+                    fichero.write("node0:f"+i+" -> node"+(i+1)+":n0;\n");
+                //}
+            }
+            //fichero.write("node0:N0 -> s2");
+            fichero.write("\n }");   
         }
-        return "Generado con exito";
+        
+        
+        
+    try {
+      
+      String dotPath = "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe";
+      
+      String fileInputPath = "C:/Users/tracs/Desktop/hashusuarios.txt";
+      String fileOutputPath = "C:/Users/tracs/Desktop/hashusuarios.jpg";
+      
+      String tParam = "-Tjpg";
+      String tOParam = "-o";
+        
+      String[] cmd = new String[5];
+      cmd[0] = dotPath;
+      cmd[1] = tParam;
+      cmd[2] = fileInputPath;
+      cmd[3] = tOParam;
+      cmd[4] = fileOutputPath;
+                  
+      Runtime rt = Runtime.getRuntime();
+      
+      rt.exec( cmd );
+      
+    } catch (Exception ex) {
+        
+    } finally {
+    }
     }
     
 }
