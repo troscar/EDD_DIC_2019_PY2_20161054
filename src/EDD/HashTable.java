@@ -73,9 +73,9 @@ public class HashTable {
     //MUESTAR LOS VALORES DE CADA ELEMENTO EN EL ARREGLO
     public void Mostrar(){
         for (int i = 0; i < arreglo.length; i++) {
-            System.out.println(i+"-"+arreglo[i].getCarnet()+"-"
-            +arreglo[i].getPassword()+"-"
-            +arreglo[i].getNombre()+"-"
+            System.out.println(i+" - "+arreglo[i].getCarnet()+" - "
+            +arreglo[i].getPassword()+" - "
+            +arreglo[i].getNombre()+" - "
             +arreglo[i].getApellido());
         }
     }
@@ -83,10 +83,10 @@ public class HashTable {
     public void Mostrar_Rechazos(){
         for (int i = 0; i < arregloRechazo.length; i++) {
             if(arregloRechazo[i]!=null){
-                System.out.println(i+"-"+arregloRechazo[i].getCarnet()+"-"
-                +arregloRechazo[i].getPassword()+"-"
-                +arregloRechazo[i].getNombre()+"-"
-                +arregloRechazo[i].getApellido()+"-"
+                System.out.println(i+"-"+arregloRechazo[i].getCarnet()+" - "
+                +arregloRechazo[i].getPassword()+" - "
+                +arregloRechazo[i].getNombre()+" - "
+                +arregloRechazo[i].getApellido()+" - "
                 +arregloRechazo[i].getRazon());
             }
         }

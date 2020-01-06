@@ -273,7 +273,7 @@ public class AVLTree {
         concatenacion = "";
     }
 
-    public void graficarArbol() {
+    public void graficarArbol(String tipo,int num) {
 
         String ruta = "C:\\Users\\tracs\\Desktop\\AVL.txt";
 
@@ -281,8 +281,16 @@ public class AVLTree {
             FileWriter fichero = new FileWriter(ruta);
             PrintWriter pw = new PrintWriter(fichero);
 
-            String datosGrafo = getCodigoGraphviz();
-            pw.print(datosGrafo);
+            String datosGrafo ="";
+            if(tipo.equals("1"))
+            {
+                datosGrafo = getCodigoGraphviz();
+            }
+            if(tipo.equals("2"))
+            {
+               datosGrafo = getCodigoGraphviz2(num);
+            }
+             pw.print(datosGrafo);
 
             fichero.close();
 
@@ -301,13 +309,20 @@ public class AVLTree {
                 + "label=\"Arbol Avl\";"
                 + getCodigoInterno(raiz) + "}\n";
     }
+    public String getCodigoGraphviz2(int tipo) {
+        return "digraph grafica{\n"
+                + "rankdir=TB;\n"
+                + "node [shape = record, style=filled, fillcolor=darksalmon];\n"
+                + "label=\"Arbol Avl\";"
+                + getCodigoInterno2(raiz,tipo) + "}\n";
+    }
 
     public String getCodigoInterno(NodoAVL r) {
         String etiqueta;
         if (r.hijoDerecho == null && r.hijoIzquierdo == null) {
-            etiqueta = "nodo" + r.noIdentificacion + " [ label =\"Nodo_" + r.noIdentificacion +  "\"];\n";
+            etiqueta = "nodo" + r.noIdentificacion + " [ label =\"" + r.noIdentificacion +  "\"];\n";
         } else {
-            etiqueta = "nodo" + r.noIdentificacion + " [ label =\"<C0>|Nodo" + r.noIdentificacion + "|<C1>\"];\n";
+            etiqueta = "nodo" + r.noIdentificacion + " [ label =\"<C0>|" + r.noIdentificacion + "|<C1>\"];\n";
         }
         if (r.hijoIzquierdo != null) {
             etiqueta = etiqueta + getCodigoInterno(r.hijoIzquierdo)
@@ -315,6 +330,30 @@ public class AVLTree {
         }
         if (r.hijoDerecho != null) {
             etiqueta = etiqueta + getCodigoInterno(r.hijoDerecho)
+                    + "nodo" + r.noIdentificacion + ":C1->nodo" + r.hijoDerecho.noIdentificacion + "\n";
+        }
+        return etiqueta;
+    }
+    
+    public String getCodigoInterno2(NodoAVL r,int num) {
+        String etiqueta = "";
+        if (r.hijoDerecho == null && r.hijoIzquierdo == null) {
+            if(r.noIdentificacion==num){
+                etiqueta = "node [shape = record, style=filled, fillcolor=lightblue];\n";
+                etiqueta = etiqueta + "nodo" + r.noIdentificacion + " [ label =\" " + r.noIdentificacion +  "\"];\n"+ "node [shape = record, style=filled, fillcolor=darksalmon];\n";
+            }
+            if(r.noIdentificacion!=num){
+                etiqueta = "nodo" + r.noIdentificacion + " [ label =\" " + r.noIdentificacion +  "\"];\n";
+            }
+        } else {
+            etiqueta = "nodo" + r.noIdentificacion + " [ label =\"<C0>| " + r.noIdentificacion + "|<C1>\"];\n";
+        }
+        if (r.hijoIzquierdo != null) {
+            etiqueta = etiqueta + getCodigoInterno2(r.hijoIzquierdo,num)
+                    + "nodo" + r.noIdentificacion + ":C0->nodo" + r.hijoIzquierdo.noIdentificacion + "\n";
+        }
+        if (r.hijoDerecho != null) {
+            etiqueta = etiqueta + getCodigoInterno2(r.hijoDerecho,num)
                     + "nodo" + r.noIdentificacion + ":C1->nodo" + r.hijoDerecho.noIdentificacion + "\n";
         }
         return etiqueta;
