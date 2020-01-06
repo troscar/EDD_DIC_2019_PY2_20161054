@@ -27,6 +27,7 @@ public class Proyecto2_EDD {
      */
     // ESTRUCTURAS A UTILIZAR EN LA APLICACION 
     public static HashTable hash = new HashTable();
+    public static AVLTree arbolAVL = new AVLTree();
     
     
     public static void main(String[] args) throws IOException {
@@ -35,8 +36,24 @@ public class Proyecto2_EDD {
         // TODO code application logic here
         Login login = new Login();
         login.setVisible (true);
-        //hash.graficar();
 
+        Integer elemento1 = new Integer("1");
+        Integer elemento2 = new Integer("2");
+        Integer elemento3 = new Integer("3");
+        Integer elemento4 = new Integer("3");
+        Integer elemento5 = new Integer("5");
+        Integer elemento6 = new Integer("6");
+        Integer elemento7 = new Integer("7");
+        Integer elemento8 = new Integer("15");
+        Integer elemento9 = new Integer("14");
+        Integer elemento10 = new Integer("13");
+
+        arbolAVL.insertar(elemento1);
+        arbolAVL.insertar(elemento2);
+        arbolAVL.insertar(elemento3);
+        arbolAVL.insertar(elemento4);
+        System.out.println("\n");
+        arbolAVL.graficarArbol();
     }
     
 }

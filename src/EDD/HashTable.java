@@ -175,7 +175,7 @@ public class HashTable {
     public String buscar_nombre(String carn){
         for (int i = 0; i < arreglo.length; i++) {
             if(arreglo[i].getCarnet().equals(carn)){
-                return arreglo[i].getPassword();
+                return arreglo[i].getNombre();
             }
         }
         return "";
@@ -184,7 +184,7 @@ public class HashTable {
     public String buscar_apellido(String carn){
         for (int i = 0; i < arreglo.length; i++) {
             if(arreglo[i].getCarnet().equals(carn)){
-                return arreglo[i].getPassword();
+                return arreglo[i].getApellido();
             }
         }
         return "";

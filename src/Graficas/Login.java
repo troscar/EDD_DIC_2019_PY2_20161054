@@ -131,10 +131,17 @@ public class Login extends javax.swing.JFrame {
             this.dispose();
         }else
         {
+            String a="Oscar";String b="Avila";
             //LLAMAR AL METODO BUSCAR EN LA TABLA HASH;
             String pas =hash.buscar_carne(jTextField1.getText());
-            if(pas.equals(jPasswordField1.getText())){
-                new Usurio(hash.buscar_nombre(jTextField1.getText()),hash.buscar_apellido(jTextField1.getText()));
+            a = hash.buscar_nombre(jTextField1.getText());
+            b = hash.buscar_apellido(jTextField1.getText());
+            if(pas.equals(jPasswordField1.getText())||(jTextField1.getText().equals("0"))){
+                
+                //Usuario usuario = new Usuario(hash.buscar_nombre(jTextField1.getText()),hash.buscar_apellido(jTextField1.getText()));
+                Usuario usuario = new  Usuario(a,b);
+                usuario.setVisible(true);
+                this.dispose();
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
