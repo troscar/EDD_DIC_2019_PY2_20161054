@@ -195,6 +195,7 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel md;
         String data[][]={};
+        int c = 1 ;
         String cabeza[]={"Posicion","Nombre","Apellido","Carnet","Password"};
         md = new DefaultTableModel(data, cabeza);
         for (int i = 0; i < hash.arreglo.length; i++) {
@@ -203,8 +204,9 @@ public class Admin extends javax.swing.JFrame {
                 String ape = hash.arreglo[i].getApellido();
                 String carnet = hash.arreglo[i].getCarnet();
                 String pass = hash.arreglo[i].getPassword();
-                String [] fila = {Integer.toString(i),nom,ape,carnet,pass};
+                String [] fila = {Integer.toString(c),nom,ape,carnet,pass};
                 md.addRow(fila);
+                c++;
             }
         }
         
