@@ -40,28 +40,7 @@ public class Proyecto2_EDD {
         
         // TODO code application logic here
         Login login = new Login();
-        login.setVisible (true);
-        
-        int V = 5; 
-        
-        graph = new Graph(V);
-        graph.addEdge(graph, 0, 1); 
-        graph.addEdge(graph, 0, 4); 
-        graph.addEdge(graph, 1, 2); 
-        graph.addEdge(graph, 1, 3); 
-        graph.addEdge(graph, 1, 4); 
-        graph.addEdge(graph, 2, 3); 
-        graph.addEdge(graph, 3, 4); 
-       
-        // print the adjacency list representation of  
-        // the above graph 
-        graph.printGraph(graph); 
-        
-//        
-//        
-    
-
-    
+        login.setVisible (true);   
     }
     
 }

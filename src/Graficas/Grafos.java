@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.json.simple.JSONArray;
@@ -169,8 +170,8 @@ public class Grafos extends javax.swing.JFrame {
             }
             JSONObject arbol=(JSONObject) obj;
             JSONArray jsonA =(JSONArray)arbol.get("Graph");
-            int sas = jsonA.size();
-            graph = new Graph(sas);
+            //int sas = jsonA.size();
+            //graph = new Graph(sas);
             //System.out.println(jsonA.size());
             JSONObject usuario;
             //System.out.println(jsonA.get(0));
@@ -198,7 +199,15 @@ public class Grafos extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "NO A INGRESADO ARCHIVO");
         }
-        graph.printGraph(graph);
+        //graph.printGraph(graph);
+        ImageIcon icono = new ImageIcon("C:\\Users\\tracs\\Desktop\\Grafoss.jpg"); // esta llamada espera a que la imagen esté cargada.
+                        int a  = icono.getIconHeight();
+                        int b = icono.getIconWidth();
+                        System.out.println(a+" "+b);
+                        jLabel2.setSize(a, b);
+                        jLabel2.setIcon(icono);
+                        jLabel2.validate();
+                        jLabel2.revalidate();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
