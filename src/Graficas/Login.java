@@ -6,6 +6,7 @@
 package Graficas;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import static proyecto2_edd.Proyecto2_EDD.hash;
 
 /**
@@ -142,6 +143,9 @@ public class Login extends javax.swing.JFrame {
                 Usuario usuario = new  Usuario(a,b);
                 usuario.setVisible(true);
                 this.dispose();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "EL CAMPO USUARIO O CONTRASEÑA ESTA INCORRECTO");
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed

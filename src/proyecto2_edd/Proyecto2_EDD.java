@@ -7,10 +7,12 @@ package proyecto2_edd;
 
 import EDD.*;
 import Graficas.*;
+import java.awt.event.ActionListener;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.TimerTask;
 import javax.swing.Timer;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -31,58 +33,46 @@ public class Proyecto2_EDD {
     public static AVLTree arbolAVL = new AVLTree();
     
     
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws NodoExcepciones  {
         //System.out.println("Hola Mundo");
         
         // TODO code application logic here
         Login login = new Login();
         login.setVisible (true);
         
-////        
-//        Integer elemento1 = new Integer("1");
-//        Integer elemento2 = new Integer("2");
-//        Integer elemento3 = new Integer("3");
-//        Integer elemento4 = new Integer("4");
-//        Integer elemento5 = new Integer("5");
-//        Integer elemento6 = new Integer("6");
-//        Integer elemento7 = new Integer("7");
-//        Integer elemento8 = new Integer("15");
-//        Integer elemento9 = new Integer("14");
-//        Integer elemento10 = new Integer("13");
-//
-//        arbolAVL.insertar(elemento1);
-//        arbolAVL.insertar(elemento2);
-//        arbolAVL.insertar(elemento3);
-//        arbolAVL.graficarArbol("2",1);
-//        System.out.println("1");
-//        Thread.sleep(10000);
-//        arbolAVL.insertar(elemento4);
-//        System.out.println("2");
-//        Thread.sleep(10000);
-//        System.out.println("3");
-//        arbolAVL.graficarArbol("1",0);
-//        System.out.println("4");
-//        String ruta = "C:\\Users\\tracs\\Documents\\NetBeansProjects\\Proyecto2_EDD\\Arbols.json";
-//        JSONParser parser = new JSONParser();
-//        try {
-//            if(!"".equals(ruta)){
-//                Object obj = parser.parse(new FileReader(ruta));
-//                JSONObject arbol=(JSONObject) obj;
-//                JSONArray jsonA =(JSONArray)arbol.get("Input");
-//                //System.out.println(jsonA.size());
-//                JSONObject usuario;
-//                System.out.println(jsonA.get(0));
-//                int num;
-//                for(Object j: jsonA){
-//                    usuario = (JSONObject) j;
-//                    System.out.println(usuario.get("num"));
-//                    num = (int)(long)usuario.get("num");
-//                }
-//                                
-//            }
-//        } catch (IOException | ParseException e) {
-//            
-//        }
+//        ArbolB arbol= new ArbolB();
+//        arbol.insertar(5);
+//        arbol.insertar(6);
+//        arbol.insertar(11);
+//        arbol.insertar(10);
+//        arbol.insertar(20);
+//        arbol.insertar(7);
+//        arbol.insertar(40);
+//        arbol.insertar(55);
+//        arbol.insertar(8);
+//        arbol.insertar(60);
+//         // arbol.insertar(70);
+//        arbol.imprimir();
+//        boolean resul=arbol.buscar(7);
+//        System.out.println("el numero 7 se encuentra en el arbol? " + resul);
+//        arbol.borrar(6);
+//        arbol.imprimir();
+//        System.out.println("-----------------");
+//         arbol.borrar(6);
+//        arbol.imprimir(); 
+//        System.out.println("-----------------");
+//        //arbol.borrar(6);
+//        arbol.imprimir();
+//        arbol.insertar(7);
+//        arbol.insertar(8);
+//        System.out.println("----------------");
+//        arbol.imprimir();
+//        
+//        
+////    Timer timer;
+    
+
+    
     }
     
 }

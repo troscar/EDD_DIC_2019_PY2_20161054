@@ -295,7 +295,14 @@ public class AVLTree {
             fichero.close();
 
             Runtime rt = Runtime.getRuntime();
-            rt.exec("dot -Tpng " + ruta + " -o C:\\Users\\tracs\\Desktop\\ArbolAVL.jpg");
+            if(tipo.equals("1"))
+            {
+                rt.exec("dot -Tpng " + ruta + " -o C:\\Users\\tracs\\Desktop\\ArbolAVL.jpg");
+            }
+            if(tipo.equals("2"))
+            {
+               rt.exec("dot -Tpng " + ruta + " -o C:\\Users\\tracs\\Desktop\\ArbolAVL2.jpg");
+            }
 
         } catch (IOException e) {
             System.out.println(e.toString());

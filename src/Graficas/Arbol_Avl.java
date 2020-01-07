@@ -44,7 +44,10 @@ public class Arbol_Avl extends javax.swing.JFrame {
         nom = n;
         ape = a;
         initComponents();
+        setLayout(null);
+        setTitle("Arbol Avl - "+n+" "+a);
         jScrollPane1.setPreferredSize(new Dimension(800, 460));
+        setLocationRelativeTo(null);
     }
 
     private Arbol_Avl() {
@@ -69,7 +72,7 @@ public class Arbol_Avl extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,9 +110,13 @@ public class Arbol_Avl extends javax.swing.JFrame {
         });
 
         jButton5.setText("Manual");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
-        jLabel3.setText(" ");
-        jScrollPane1.setViewportView(jLabel3);
+        jScrollPane1.setViewportView(jLabel2);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -118,7 +125,7 @@ public class Arbol_Avl extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(54, 54, 54)
                         .addComponent(jButton2)
@@ -131,12 +138,10 @@ public class Arbol_Avl extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 34, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(744, 744, 744)
-                                .addComponent(jButton1)))))
+                        .addGap(0, 31, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 796, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(22, 22, 22))
         );
         jPanel1Layout.setVerticalGroup(
@@ -152,8 +157,8 @@ public class Arbol_Avl extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton3)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(21, 21, 21))
@@ -163,7 +168,9 @@ public class Arbol_Avl extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,65 +195,196 @@ public class Arbol_Avl extends javax.swing.JFrame {
         ruta = Archivo.getAbsolutePath();
         
     }//GEN-LAST:event_jButton2ActionPerformed
-    
+    Timer timer = null;
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        
-        JSONParser parser = new JSONParser();
-        try {
-            if(!"".equals(ruta)){
-                Object obj = parser.parse(new FileReader(ruta));
-                JSONObject arbol=(JSONObject) obj;
-                JSONArray jsonA =(JSONArray)arbol.get("Input");
-                //System.out.println(jsonA.size());
-                JSONObject usuario;
-                //System.out.println(jsonA.get(0));
-                int num;
-                int c =0;
-                for(Object j: jsonA){
-                    
-                    usuario = (JSONObject) j;
-                    System.out.println(usuario.get("num"));
-                    num = (int)(long)usuario.get("num");
-                    arbolAVL.insertar(num);
-                    if(c>3){
-                        Thread.sleep(10000);
-                        arbolAVL.graficarArbol("1",0);
-                        System.out.println("graficar -----");
-                        ImageIcon icono = new ImageIcon("C:\\Users\\tracs\\Desktop\\ArbolAVL.jpg"); // esta llamada espera a que la imagen esté cargada.
+        timer = null;
+        final JSONParser parser = new JSONParser();
+        if((timer==null)&&(!"".equals(ruta))){
+            timer = new Timer(1000, new ActionListener() {
+                
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    Object obj = null;
+                    try {
+                        obj = parser.parse(new FileReader(ruta));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Arbol_Avl.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(Arbol_Avl.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    JSONObject arbol=(JSONObject) obj;
+                    JSONArray jsonA =(JSONArray)arbol.get("Input");
+                    //System.out.println(jsonA.size());
+                    JSONObject usuario;
+                    //System.out.println(jsonA.get(0));
+                    int num;
+                    int c =1;
+                    for(Object j: jsonA){
+                        
+                        usuario = (JSONObject) j;
+                        System.out.println(usuario.get("num"));
+                        num = (int)(long)usuario.get("num");
+                        arbolAVL.insertar(num);
+                        try {
+                            Thread.sleep(3000);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Arbol_Avl.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        ImageIcon icono = new ImageIcon("C:\\Users\\tracs\\Desktop\\limpio.jpg"); // esta llamada espera a que la imagen esté cargada.
                         int a  = icono.getIconHeight();
                         int b = icono.getIconWidth();
-                        //System.out.println(a);
-                        jLabel3.setSize(a, b);
-                        jLabel3.setIcon(icono);
+                        System.out.println(a+" "+b);
+                        jLabel2.setSize(a, b);
+                        jLabel2.setIcon(icono);
+                        jLabel2.validate();
+                        jLabel2.revalidate();
+                        if(c>=3){
+                            arbolAVL.graficarArbol("1",0);
+                            System.out.println("graficar -----");
+                        }
+                        try {
+                            Thread.sleep(3000);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Arbol_Avl.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        icono = new ImageIcon("C:\\Users\\tracs\\Desktop\\ArbolAVL.jpg"); // esta llamada espera a que la imagen esté cargada.
+                        a  = icono.getIconHeight();
+                        b = icono.getIconWidth();
+                        System.out.println(a+" "+b);
+                        jLabel2.setSize(a, b);
+                        jLabel2.setIcon(icono);
+                        jLabel2.validate();
+                        jLabel2.revalidate();
+                        jLabel2.repaint();
                         
-                        jLabel3.validate();
-                        jLabel3.revalidate();
+                        System.out.println(c);
+                        c++;
+                        
                     }
-                    System.out.println(c);
-                    c++;
+                    timer.stop();
                 }
-                                
-            }else{
-                JOptionPane.showMessageDialog(null, "NO A INGRESADO ARCHIVO");
-            }
-        } catch (IOException | ParseException e) {
+            });
+            timer.start();
             
+        }else{
+            JOptionPane.showMessageDialog(null, "NO A INGRESADO ARCHIVO");
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+    public int cc = 0;
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:-
+        timer.stop();
+        cc = 0;
+        String ss = jTextField1.getText();
+        System.out.println(jTextField1.getText().getClass());
+        int num = Integer.parseInt(ss.trim());
+        arbolAVL.graficarArbol("2", num);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Arbol_Avl.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        ImageIcon icono = new ImageIcon("C:\\Users\\tracs\\Desktop\\ArbolAVL2.jpg");
+         
+        jLabel2.setIcon(icono);
+        cc=2;
+        System.out.println("eliminacion");
+        arbolAVL.eliminar(num);
+        arbolAVL.graficarArbol("1", 0);
+        try {
+            Thread.sleep(3000);
         } catch (InterruptedException ex) {
             Logger.getLogger(Arbol_Avl.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        ImageIcon icono = new ImageIcon("C:\\Users\\tracs\\Desktop\\ArbolAVL.jpg"); // esta llamada espera a que la imagen esté cargada.
-//        int a  = icono.getIconHeight();
-//        int b = icono.getIconWidth();
-//        System.out.println(a);
-//        jLabel3.setSize(a, b);
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:-
-        int num = Integer.getInteger(jTextField1.getText());
+        System.out.println("eliminacion completa");
+        icono = new ImageIcon("C:\\Users\\tracs\\Desktop\\ArbolAVL.jpg");
+        jLabel2.setIcon(icono);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Arbol_Avl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        arbolAVL.graficarArbol("1", 0);
+        System.out.println("final");
+        
         
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        timer = null;
+        final JSONParser parser = new JSONParser();
+        if((timer==null)&&(!"".equals(ruta))){
+            timer = new Timer(1000, new ActionListener() {
+                
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    Object obj = null;
+                    try {
+                        obj = parser.parse(new FileReader(ruta));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Arbol_Avl.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(Arbol_Avl.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    JSONObject arbol=(JSONObject) obj;
+                    JSONArray jsonA =(JSONArray)arbol.get("Input");
+                    //System.out.println(jsonA.size());
+                    JSONObject usuario;
+                    //System.out.println(jsonA.get(0));
+                    int num;
+                    int c =0;
+                    for(Object j: jsonA){
+                        
+                        usuario = (JSONObject) j;
+                        System.out.println(usuario.get("num"));
+                        num = (int)(long)usuario.get("num");
+                        arbolAVL.insertar(num);
+                        try {
+                            Thread.sleep(4000);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Arbol_Avl.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        ImageIcon icono = new ImageIcon("C:\\Users\\tracs\\Desktop\\limpio.jpg"); // esta llamada espera a que la imagen esté cargada.
+                        int a  = icono.getIconHeight();
+                        int b = icono.getIconWidth();
+                        System.out.println(a+" "+b);
+                        jLabel2.setSize(a, b);
+                        jLabel2.setIcon(icono);
+                        jLabel2.validate();
+                        jLabel2.revalidate();
+                        if(c>=3){
+                            arbolAVL.graficarArbol("1",0);
+                            System.out.println("graficar -----");
+                        }
+                        try {
+                            Thread.sleep(4000);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Arbol_Avl.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        icono = new ImageIcon("C:\\Users\\tracs\\Desktop\\ArbolAVL.jpg"); // esta llamada espera a que la imagen esté cargada.
+                        a  = icono.getIconHeight();
+                        b = icono.getIconWidth();
+                        System.out.println(a+" "+b);
+                        jLabel2.setSize(a, b);
+                        jLabel2.setIcon(icono);
+                        jLabel2.validate();
+                        jLabel2.revalidate();
+                        jLabel2.repaint();
+                        System.out.println(c);
+                        c++;
+                        
+                    }
+                    timer.stop();
+                }
+            });
+            timer.start();
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "NO A INGRESADO ARCHIVO");
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -298,7 +436,7 @@ public class Arbol_Avl extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
+    public javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
