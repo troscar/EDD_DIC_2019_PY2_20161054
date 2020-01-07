@@ -5,6 +5,10 @@
  */
 package EDD;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 /**
  *
  * @author tracs
@@ -639,7 +643,87 @@ public class ArbolB {
      }
         
     }
+    
+    int ccc = 0;
+    public String Graficardor(){
+        String etiqueta ="",ss="";
+          
+          for (int i = 0; i < numeros; i++) {
+            ss = ss+ valoresNodo[i] + "|";
+          }
+          etiqueta = etiqueta + "nodo"+ccc+" [ label =\"{ " + ss +  "} \"];\n";
+          ccc++;
+          if (hijos[0] != null) {
+            hijos[0].Graficardor();
+          }
+
+          if (hijos[1] != null) {
+            ccc++;
+            etiqueta = etiqueta+ hijos[1].Graficardor();
+            etiqueta = etiqueta+"nodo0:n0-> nodo"+ccc+":n0;\n";
+
+          }
+         if (hijos[2] != null) {
+            ccc++;
+            etiqueta = etiqueta+  hijos[2].Graficardor();
+            etiqueta = etiqueta+"nodo0:n1-> nodo"+ccc+":n0;\n";
+          }
+          if (hijos[3] != null) {
+            ccc++;
+            etiqueta = etiqueta+hijos[3].Graficardor();
+            etiqueta = etiqueta+"nodo0:n2-> nodo"+ccc+":n0;\n";
+         }
+          if (hijos[4] != null) {
+              ccc++;
+            etiqueta = etiqueta+ hijos[4].Graficardor();
+            etiqueta = etiqueta+"nodo0:n3-> nodo"+ccc+":n0;\n";
+         }
+         return etiqueta;   
+    }
   }
+  public void Graphviz() {
+
+        String ruta = "C:\\Users\\tracs\\Desktop\\B.txt";
+
+        try {
+            FileWriter fichero = new FileWriter(ruta);
+            PrintWriter pw = new PrintWriter(fichero);
+
+            String datosGrafo ="";
+            
+            datosGrafo = getCodigoGraphviz();
+            
+            pw.print(datosGrafo);
+
+            fichero.close();
+
+            Runtime rt = Runtime.getRuntime();
+            
+            rt.exec("dot -Tpng " + ruta + " -o C:\\Users\\tracs\\Desktop\\ArbolB.jpg");
+            
+
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+    }
+    
+    public String getCodigoGraphviz() {
+        return "digraph grafica{\n"
+                + "nodesep=.05;\n"
+                + "rankdir=LR;"
+                + "node [shape=record,width = 1.5];\n"
+                + "label=\"Arbol B\";"
+                + getCodigoInterno(raiz) + "}\n";
+    }
+    
+    public String getCodigoInterno(Node r) {
+        String etiqueta ="";
+        etiqueta = raiz.Graficardor();
+        
+        return etiqueta;
+    }
+    
+    
 }
 
     

@@ -5,15 +5,14 @@
  */
 package Graficas;
 
-import EDD.AVLTree;
+import EDD.ArbolB;
+import EDD.NodoExcepciones;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -29,27 +28,26 @@ import org.json.simple.parser.ParseException;
  *
  * @author tracs
  */
-public class Arbol_Avl extends javax.swing.JFrame {
+public class Arbol_B extends javax.swing.JFrame {
 
     /**
-     * Creates new form Arbol_Avl
+     * Creates new form Arbol_B
      */
-    public String nom;
-    public String ape;
-    public   AVLTree arbolAVL = new AVLTree();
+    public String ape ="",nom="";
+    public  ArbolB arbolB = new ArbolB();
     
-    public Arbol_Avl(String n,String a) {
-        arbolAVL = new AVLTree();
-        nom = n;
-        ape = a;
+    public Arbol_B(String n , String a) {
+        
+        arbolB= new ArbolB();
+        ape= a;
+        nom=n;
         initComponents();
         setLayout(null);
-        setTitle("Arbol Avl - "+n+" "+a);
-        jScrollPane1.setPreferredSize(new Dimension(800, 460));
+        setTitle("Arbol B - "+n+" "+a);
         setLocationRelativeTo(null);
     }
 
-    private Arbol_Avl() {
+    private Arbol_B() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -66,32 +64,30 @@ public class Arbol_Avl extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jLabel2 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 51));
+        jPanel1.setBackground(new java.awt.Color(0, 204, 102));
 
-        jLabel1.setFont(new java.awt.Font("Dubai", 1, 24)); // NOI18N
-        jLabel1.setText("Arbol AVL");
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Arbol B");
 
-        jButton1.setText("Salir");
+        jButton1.setText("Auto");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cargar Arbol");
+        jButton2.setText("Manual");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -105,47 +101,26 @@ public class Arbol_Avl extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Automatico");
+        jScrollPane1.setViewportView(jLabel2);
+
+        jButton4.setText("Salir");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Manual");
+        jButton5.setText("Cargar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
 
-        jScrollPane1.setViewportView(jLabel2);
-
-        jButton6.setText("Buscar");
+        jButton6.setText("Refresh");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
-            }
-        });
-
-        jButton7.setText("InOrden");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
-        jButton8.setText("PostOrden");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-
-        jButton9.setText("PreOrden");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
             }
         });
 
@@ -154,67 +129,55 @@ public class Arbol_Avl extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(54, 54, 54)
-                        .addComponent(jButton2)
-                        .addGap(37, 37, 37)
-                        .addComponent(jButton4)
-                        .addGap(26, 26, 26)
-                        .addComponent(jButton5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)
-                        .addGap(37, 37, 37))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 31, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton7)
-                                .addGap(39, 39, 39)
-                                .addComponent(jButton8)
-                                .addGap(45, 45, 45)
-                                .addComponent(jButton9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 796, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(22, 22, 22))
+                                .addComponent(jLabel1)
+                                .addGap(35, 35, 35)
+                                .addComponent(jButton5)
+                                .addGap(41, 41, 41)
+                                .addComponent(jButton1)
+                                .addGap(41, 41, 41)
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4)))
+                .addGap(42, 42, 42))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(jButton2)
-                        .addComponent(jButton4)
-                        .addComponent(jButton5))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton3)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton6)))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8)
-                    .addComponent(jButton9))
-                .addGap(21, 21, 21))
+                    .addComponent(jButton4)
+                    .addComponent(jButton6))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,23 +187,48 @@ public class Arbol_Avl extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        String ss = jTextField1.getText();
+        System.out.println(jTextField1.getText().getClass());
+        int num = Integer.parseInt(ss.trim());
+        System.out.println(num);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Arbol_Avl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("eliminacion");
+        System.out.println("eliminacion completa");
+        arbolB.Graphviz();
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Arbol_Avl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        System.out.println("final");
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         Usuario usuario = new Usuario(nom, ape);
         usuario.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-    public String ruta = "";
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:    
+    }//GEN-LAST:event_jButton4ActionPerformed
+    public String ruta; Timer timer = null;
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
         JFileChooser jfc = new JFileChooser();
         jfc.showOpenDialog(this);
         File Archivo = jfc.getSelectedFile();
         ruta = Archivo.getAbsolutePath();
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
-    Timer timer = null;
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         timer = null;
         final JSONParser parser = new JSONParser();
@@ -269,13 +257,17 @@ public class Arbol_Avl extends javax.swing.JFrame {
                         usuario = (JSONObject) j;
                         System.out.println(usuario.get("num"));
                         num = (int)(long)usuario.get("num");
-                        arbolAVL.insertar(num);
+                        try {
+                            arbolB.insertar(num);
+                        } catch (NodoExcepciones ex) {
+                            Logger.getLogger(Arbol_B.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         try {
                             Thread.sleep(3000);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(Arbol_Avl.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        ImageIcon icono = new ImageIcon("C:\\Users\\tracs\\Desktop\\limpio.jpg"); // esta llamada espera a que la imagen esté cargada.
+                        ImageIcon icono = new ImageIcon("C:\\Users\\tracs\\Desktop\\ArbolB.jpg"); // esta llamada espera a que la imagen esté cargada.
                         int a  = icono.getIconHeight();
                         int b = icono.getIconWidth();
                         System.out.println(a+" "+b);
@@ -284,7 +276,7 @@ public class Arbol_Avl extends javax.swing.JFrame {
                         jLabel2.validate();
                         jLabel2.revalidate();
                         if(c>=3){
-                            arbolAVL.graficarArbol("1",0);
+                            arbolB.Graphviz();
                             System.out.println("graficar -----");
                         }
                         try {
@@ -292,7 +284,7 @@ public class Arbol_Avl extends javax.swing.JFrame {
                         } catch (InterruptedException ex) {
                             Logger.getLogger(Arbol_Avl.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        icono = new ImageIcon("C:\\Users\\tracs\\Desktop\\ArbolAVL.jpg"); // esta llamada espera a que la imagen esté cargada.
+                        icono = new ImageIcon("C:\\Users\\tracs\\Desktop\\ArbolB.jpg"); // esta llamada espera a que la imagen esté cargada.
                         a  = icono.getIconHeight();
                         b = icono.getIconWidth();
                         System.out.println(a+" "+b);
@@ -314,41 +306,18 @@ public class Arbol_Avl extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "NO A INGRESADO ARCHIVO");
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
-    public int cc = 0;
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:-]
-        cc = 0;
-        String ss = jTextField1.getText();
-        System.out.println(jTextField1.getText().getClass());
-        int num = Integer.parseInt(ss.trim());
-        System.out.println(num);
-        arbolAVL.graficarArbol("2", num);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Arbol_Avl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("eliminacion");
-        boolean z = arbolAVL.eliminar(num);
-        System.out.println(z);
-        System.out.println("eliminacion completa");
-        arbolAVL.graficarArbol("1", 0);
-        try {
-            Thread.sleep(4000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Arbol_Avl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        arbolAVL.graficarArbol("1", 0);
-        System.out.println("final");
-        
-        
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
+        ImageIcon icono = new ImageIcon("C:\\Users\\tracs\\Desktop\\ArbolB.jpg"); // esta llamada espera a que la imagen esté cargada.
+                        int a  = icono.getIconHeight();
+                        int b = icono.getIconWidth();
+                        System.out.println(a+" "+b);
+                        jLabel2.setSize(a, b);
+                        jLabel2.setIcon(icono);
+                        jLabel2.validate();
+                        jLabel2.revalidate();
+                        jLabel2.repaint();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         timer = null;
         final JSONParser parser = new JSONParser();
@@ -371,15 +340,19 @@ public class Arbol_Avl extends javax.swing.JFrame {
                     JSONObject usuario;
                     //System.out.println(jsonA.get(0));
                     int num;
-                    int c =0;
+                    int c =1;
                     for(Object j: jsonA){
                         
                         usuario = (JSONObject) j;
                         System.out.println(usuario.get("num"));
                         num = (int)(long)usuario.get("num");
-                        arbolAVL.insertar(num);
                         try {
-                            Thread.sleep(4000);
+                            arbolB.insertar(num);
+                        } catch (NodoExcepciones ex) {
+                            Logger.getLogger(Arbol_B.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        try {
+                            Thread.sleep(3000);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(Arbol_Avl.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -392,15 +365,15 @@ public class Arbol_Avl extends javax.swing.JFrame {
                         jLabel2.validate();
                         jLabel2.revalidate();
                         if(c>=3){
-                            arbolAVL.graficarArbol("1",0);
+                            arbolB.Graphviz();
                             System.out.println("graficar -----");
                         }
                         try {
-                            Thread.sleep(4000);
+                            Thread.sleep(3000);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(Arbol_Avl.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        icono = new ImageIcon("C:\\Users\\tracs\\Desktop\\ArbolAVL.jpg"); // esta llamada espera a que la imagen esté cargada.
+                        icono = new ImageIcon("C:\\Users\\tracs\\Desktop\\ArbolB.jpg"); // esta llamada espera a que la imagen esté cargada.
                         a  = icono.getIconHeight();
                         b = icono.getIconWidth();
                         System.out.println(a+" "+b);
@@ -409,6 +382,7 @@ public class Arbol_Avl extends javax.swing.JFrame {
                         jLabel2.validate();
                         jLabel2.revalidate();
                         jLabel2.repaint();
+                        
                         System.out.println(c);
                         c++;
                         
@@ -421,42 +395,20 @@ public class Arbol_Avl extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "NO A INGRESADO ARCHIVO");
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        ImageIcon icono = new ImageIcon("C:\\Users\\tracs\\Desktop\\ArbolAVL2.jpg");
-         
-        jLabel2.setIcon(icono);
-        int a  = icono.getIconHeight();
-        int b = icono.getIconWidth();
-        System.out.println(a+" "+b);
-        jLabel2.setSize(a, b);
-        jLabel2.setIcon(icono);
-        jLabel2.revalidate();
+        ImageIcon icono = new ImageIcon("C:\\Users\\tracs\\Desktop\\ArbolB.jpg"); // esta llamada espera a que la imagen esté cargada.
+                        int a  = icono.getIconHeight();
+                        int b = icono.getIconWidth();
+                        System.out.println(a+" "+b);
+                        jLabel2.setSize(a, b);
+                        jLabel2.setIcon(icono);
+                        jLabel2.validate();
+                        jLabel2.revalidate();
+                        jLabel2.repaint();
     }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-        String g = arbolAVL.Indorden();
-        System.out.println(g);
-        arbolAVL.generar_graph("1");
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-        String g = arbolAVL.Postorden();
-        System.out.println(g);
-        arbolAVL.generar_graph("2");
-    }//GEN-LAST:event_jButton8ActionPerformed
-
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-        
-        String g = arbolAVL.Preorden();
-        System.out.println(g);
-        arbolAVL.generar_graph("3");
-    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -475,31 +427,23 @@ public class Arbol_Avl extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Arbol_Avl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Arbol_B.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Arbol_Avl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Arbol_B.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Arbol_Avl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Arbol_B.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Arbol_Avl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Arbol_B.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Arbol_Avl().setVisible(true);
+                new Arbol_B().setVisible(true);
             }
         });
     }
-    
-    
-    
-    
-    
-    
-    
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -508,11 +452,8 @@ public class Arbol_Avl extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
-    public javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;

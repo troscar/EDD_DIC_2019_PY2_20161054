@@ -76,6 +76,8 @@ public class Ordenamientos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(51, 0, 204));
+
         jButton1.setText("Salir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,7 +120,7 @@ public class Ordenamientos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(449, 449, 449)
+                        .addGap(448, 448, 448)
                         .addComponent(jButton1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -141,9 +143,9 @@ public class Ordenamientos extends javax.swing.JFrame {
                     .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -236,10 +238,26 @@ public class Ordenamientos extends javax.swing.JFrame {
                 System.out.println(usuario.get("num"));
                 num = (int)(long)usuario.get("num");
                 arreglo.add(num);
+                Collections.sort(arreglo);
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Arbol_Avl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                generar_graph(arreglo);
             }
         }else{
             JOptionPane.showMessageDialog(null, "NO A INGRESADO ARCHIVO");
         }
+        ImageIcon icono = new ImageIcon("C:\\Users\\tracs\\Desktop\\arreglo1.jpg"); // esta llamada espera a que la imagen esté cargada.
+        int a  = icono.getIconHeight();
+        int b = icono.getIconWidth();
+        System.out.println(a+" "+b);
+        jLabel3.setSize(a, b);
+        jLabel3.setIcon(icono);
+        jLabel3.validate();
+        jLabel3.revalidate();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -279,6 +297,14 @@ public class Ordenamientos extends javax.swing.JFrame {
                 arrayaux[i]=arreglo.get(i);
             }
             ordenarRapido(arrayaux);
+            ImageIcon icono = new ImageIcon("C:\\Users\\tracs\\Desktop\\arreglo1.jpg"); // esta llamada espera a que la imagen esté cargada.
+            int a  = icono.getIconHeight();
+            int b = icono.getIconWidth();
+            System.out.println(a+" "+b);
+            jLabel3.setSize(a, b);
+            jLabel3.setIcon(icono);
+            jLabel3.validate();
+            jLabel3.revalidate();
         }else{
             JOptionPane.showMessageDialog(null, "NO A INGRESADO ARCHIVO");
         }
@@ -313,6 +339,7 @@ public class Ordenamientos extends javax.swing.JFrame {
                             } catch (InterruptedException ex) {
                                 Logger.getLogger(Ordenamientos.class.getName()).log(Level.SEVERE, null, ex);
                             }
+                            
                     }
             }
 
@@ -327,10 +354,20 @@ public class Ordenamientos extends javax.swing.JFrame {
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Ordenamientos.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    
             }
+            
             quickSort(vec, inicio, elemDer-1);
             quickSort(vec, elemDer+1, fin);
             //imprimirVector(vec);
+            ImageIcon icono = new ImageIcon("C:\\Users\\tracs\\Desktop\\arreglo1.jpg"); // esta llamada espera a que la imagen esté cargada.
+            int a  = icono.getIconHeight();
+            int b = icono.getIconWidth();
+            System.out.println(a+" "+b);
+            jLabel3.setSize(a, b);
+            jLabel3.setIcon(icono);
+            jLabel3.validate();
+            jLabel3.revalidate();
             
     }
 
@@ -399,7 +436,7 @@ public class Ordenamientos extends javax.swing.JFrame {
                 generar_graph(a);
                 System.out.println(a);
                 try {
-                    Thread.sleep(4000);
+                    Thread.sleep(2000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Ordenamientos.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -475,7 +512,7 @@ public class Ordenamientos extends javax.swing.JFrame {
                 + "nodesep=.05;\n"
                 + "rankdir=LR;"
                 + "node [shape=record,width = 1.5];\n"
-                + "label=\"Orden Burbuja \";"
+                + "label=\"Ordenado  \";"
                 + getCodigoInterno(a) + "}\n";
     }
     

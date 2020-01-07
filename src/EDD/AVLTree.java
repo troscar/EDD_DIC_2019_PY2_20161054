@@ -365,4 +365,123 @@ public class AVLTree {
         }
         return etiqueta;
     }
+    
+    public String Indorden() {
+        return Indorden(raiz);
+    }
+    
+    public String Indorden(NodoAVL r) {
+        String etiqueta ="";
+        if (r.hijoIzquierdo != null) {
+            etiqueta = etiqueta + Indorden(r.hijoIzquierdo);
+        }
+        if (r.hijoIzquierdo == null && r.hijoDerecho==null) {
+            return " | " + r.noIdentificacion ;
+        }
+        if (r.hijoDerecho != null) {
+            etiqueta = etiqueta +" | " + r.noIdentificacion + Indorden(r.hijoDerecho) ;
+        }
+        if (r.hijoDerecho == null) {
+            return " | " + r.noIdentificacion ;
+        }
+        return etiqueta;
+    }
+    
+    public void generar_graph(String a){
+         String ruta = "C:\\Users\\tracs\\Desktop\\arre2.txt";
+        
+        try {
+            FileWriter fichero = new FileWriter(ruta);
+            PrintWriter pw = new PrintWriter(fichero);
+
+            String datosGrafo ="";
+            datosGrafo = getCodigoGraphviz(a);
+            pw.print(datosGrafo);
+
+            fichero.close();
+
+            Runtime rt = Runtime.getRuntime();
+            
+            rt.exec("dot -Tpng " + ruta + " -o C:\\Users\\tracs\\Desktop\\arreglo2.jpg");
+            
+
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+    }
+    public String getCodigoGraphviz(String a) {
+        return "digraph grafica{\n"
+                + "nodesep=.05;\n"
+                + "rankdir=LR;"
+                + "node [shape=record,width = 1.5];\n"
+                + "label=\"Ordenados \";"
+                + getCodigoInterno(a) + "}\n";
+    }
+    
+    public String getCodigoInterno(String a) {
+        String etiqueta = "";
+        if("1".equals(a)){
+            etiqueta = etiqueta + "nodo0 [ label =\"{ " + Indorden() +  "} \"];\n";
+        }
+        if("2".equals(a)){
+            etiqueta = etiqueta + "nodo0 [ label =\"{ " + Postorden() +  "} \"];\n";
+        }
+        if("3".equals(a)){
+           etiqueta = etiqueta + "nodo0 [ label =\"{ " + Preorden() +  "} \"];\n";
+        }
+        
+        return etiqueta;
+    }
+    
+    public String Postorden() {
+        return Postorden(raiz);
+    }
+    
+    public String Postorden(NodoAVL r) {
+        String etiqueta ="";
+        if (r.hijoIzquierdo != null) {
+            etiqueta = etiqueta + Postorden(r.hijoIzquierdo);
+        }
+        if (r.hijoIzquierdo == null && r.hijoDerecho==null) {
+            return " | " + r.noIdentificacion ;
+        }
+        if (r.hijoIzquierdo == null && r.hijoDerecho!=null) {
+            etiqueta = etiqueta + Postorden(r.hijoDerecho);
+        }
+        
+        if (r.hijoDerecho != null) {
+            etiqueta = etiqueta + Postorden(r.hijoDerecho)+" | " + r.noIdentificacion  ;
+        }
+        
+        if (r.hijoDerecho == null && r.hijoIzquierdo==null) {
+            return " | " + r.noIdentificacion ;
+        }
+        if (r.hijoDerecho == null && r.hijoIzquierdo!=null) {
+            etiqueta = etiqueta + Postorden(r.hijoIzquierdo);
+        }
+        return etiqueta;
+    }
+    
+    public String Preorden() {
+        return Preorden(raiz);
+    }
+    
+    public String Preorden(NodoAVL r) {
+        String etiqueta ="";
+        if (r.hijoIzquierdo != null) {
+            etiqueta = etiqueta +" | " + r.noIdentificacion+ Preorden(r.hijoIzquierdo);
+        }
+        if (r.hijoIzquierdo == null && r.hijoDerecho==null) {
+            return " | " + r.noIdentificacion;
+        }
+        if (r.hijoIzquierdo == null && r.hijoDerecho!=null) {
+            etiqueta = etiqueta +" | " + r.noIdentificacion +Preorden(r.hijoDerecho);
+        }
+        if (r.hijoDerecho != null) {
+            etiqueta = etiqueta + Preorden(r.hijoDerecho);
+        }
+        
+        return etiqueta;
+    }
+    
 }

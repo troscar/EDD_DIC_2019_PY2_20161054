@@ -56,7 +56,7 @@ public class Admin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel1.setBackground(new java.awt.Color(255, 51, 0));
 
         jButton1.setText("Carga Masiva");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

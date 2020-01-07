@@ -30,8 +30,10 @@ public class Proyecto2_EDD {
      */
     // ESTRUCTURAS A UTILIZAR EN LA APLICACION 
     public static HashTable hash = new HashTable();
-    public static AVLTree arbolAVL = new AVLTree();
-    
+    public static  AVLTree arbolAVL = new AVLTree();
+    public static Graph graph = new Graph(5);
+    public static ArbolB arbol= new ArbolB();
+            
     
     public static void main(String[] args) throws NodoExcepciones  {
         //System.out.println("Hola Mundo");
@@ -40,36 +42,50 @@ public class Proyecto2_EDD {
         Login login = new Login();
         login.setVisible (true);
         
-//        ArbolB arbol= new ArbolB();
-//        arbol.insertar(5);
-//        arbol.insertar(6);
-//        arbol.insertar(11);
-//        arbol.insertar(10);
-//        arbol.insertar(20);
-//        arbol.insertar(7);
-//        arbol.insertar(40);
-//        arbol.insertar(55);
-//        arbol.insertar(8);
-//        arbol.insertar(60);
-//         // arbol.insertar(70);
-//        arbol.imprimir();
-//        boolean resul=arbol.buscar(7);
-//        System.out.println("el numero 7 se encuentra en el arbol? " + resul);
-//        arbol.borrar(6);
-//        arbol.imprimir();
-//        System.out.println("-----------------");
-//         arbol.borrar(6);
-//        arbol.imprimir(); 
-//        System.out.println("-----------------");
-//        //arbol.borrar(6);
-//        arbol.imprimir();
-//        arbol.insertar(7);
-//        arbol.insertar(8);
-//        System.out.println("----------------");
-//        arbol.imprimir();
+//        int V = 5; 
+//         
+//        graph.addEdge(graph, 0, 1); 
+//        graph.addEdge(graph, 0, 4); 
+//        graph.addEdge(graph, 1, 2); 
+//        graph.addEdge(graph, 1, 3); 
+//        graph.addEdge(graph, 1, 4); 
+//        graph.addEdge(graph, 2, 3); 
+//        graph.addEdge(graph, 3, 4); 
+//       
+//        // print the adjacency list representation of  
+//        // the above graph 
+//        graph.printGraph(graph); 
+        
+        ArbolB arbol= new ArbolB();
+        arbol.insertar(5);
+        arbol.insertar(6);
+        arbol.insertar(11);
+        arbol.insertar(10);
+        arbol.insertar(20);
+        arbol.insertar(7);
+        arbol.insertar(40);
+        arbol.insertar(55);
+        arbol.insertar(8);
+        arbol.insertar(60);
+         // arbol.insertar(70);
+        arbol.imprimir();
+        boolean resul=arbol.buscar(7);
+        System.out.println("el numero 7 se encuentra en el arbol? " + resul);
+        arbol.borrar(6);
+        arbol.imprimir();
+        System.out.println("-----------------");
+         arbol.borrar(6);
+        arbol.imprimir(); 
+        System.out.println("-----------------");
+        //arbol.borrar(6);
+        arbol.imprimir();
+        arbol.insertar(7);
+        arbol.insertar(8);
+        System.out.println("----------------");
+        arbol.imprimir();
+        arbol.Graphviz();
 //        
 //        
-////    Timer timer;
     
 
     

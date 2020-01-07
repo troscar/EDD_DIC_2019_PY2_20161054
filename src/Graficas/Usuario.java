@@ -82,6 +82,11 @@ public class Usuario extends javax.swing.JFrame {
         jButton2.setText("Grafo");
 
         jButton3.setText("Arbol B");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Salir");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -184,6 +189,13 @@ public class Usuario extends javax.swing.JFrame {
         ordenamientos.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        Arbol_B arbol_B = new Arbol_B(nom, ape);
+        arbol_B.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
