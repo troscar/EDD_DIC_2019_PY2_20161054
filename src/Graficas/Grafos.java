@@ -8,7 +8,10 @@ package Graficas;
 import EDD.Graph;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -149,9 +152,10 @@ public class Grafos extends javax.swing.JFrame {
         File Archivo = jfc.getSelectedFile();
         ruta = Archivo.getAbsolutePath();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    String ppp="";
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        ppp="";
         final JSONParser parser = new JSONParser();
         if(ruta !=  null){
 
@@ -184,11 +188,13 @@ public class Grafos extends javax.swing.JFrame {
                     hii =(String)usuario2.get("Node");
                     //System.out.println(num+" - "+ hii);
                     //graph.addEdge(graph, num, hii); 
+                    ppp = ppp + num +" -> "+ hii+";\n";
                     
                 }
                 
             }
             //System.out.println(arreglo);
+            generar_graph();
         }else{
             JOptionPane.showMessageDialog(null, "NO A INGRESADO ARCHIVO");
         }
@@ -230,6 +236,39 @@ public class Grafos extends javax.swing.JFrame {
         });
     }
 
+    public void generar_graph(){
+         String ruta = "C:\\Users\\tracs\\Desktop\\graff1.txt";
+        
+        try {
+            FileWriter fichero = new FileWriter(ruta);
+            PrintWriter pw = new PrintWriter(fichero);
+
+            String datosGrafo ="";
+       
+            datosGrafo = getCodigoGraphviz();
+            
+             pw.print(datosGrafo);
+
+            fichero.close();
+
+            Runtime rt = Runtime.getRuntime();
+            
+            rt.exec("dot -Tpng " + ruta + " -o C:\\Users\\tracs\\Desktop\\Grafoss.jpg");
+            
+
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+    }
+    public String getCodigoGraphviz() {
+        return "digraph grafica{\n"
+                + "nodesep=.05;\n"
+                + "rankdir=LR;"
+                + "node [shape=record,width = 1.5];\n"
+                + "label=\"Grafo  \";"
+                + ppp + "}\n";
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
